@@ -11,7 +11,7 @@ async function selectMediaStream()
         const mediaStream=await navigator.mediaDevices.getDisplayMedia();
         videoElement.srcObject=mediaStream;
         videoElement.onloadedmetadata=()=>{
-            videoElement.onplay();
+            videoElement.play();
         }
     }catch(error)
     {
@@ -19,6 +19,17 @@ async function selectMediaStream()
         console.log("Whoops error here",error);
     }
 }
+
+button.addEventListener('click',async()=>{
+    // Disable button
+    button.disabled=true;
+    // Start picture in picture
+    await videoElement.requestPictureInPicture();
+    // Reset Button
+    button.disabled=false; 
+    
+});
+
 
 
 // On Load
